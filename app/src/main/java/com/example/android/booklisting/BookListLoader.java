@@ -6,7 +6,7 @@ import java.util.List;
 
 public class BookListLoader extends AsyncTaskLoader<List<BookingList>>{
 
-    private static final String LOG_TAG = EarthquakeLoader.class.getName();
+    private static final String LOG_TAG = BookListLoader.class.getName();
     private String mUrl;
 
     public BookListLoader(Context context, String url) {
@@ -20,14 +20,14 @@ public class BookListLoader extends AsyncTaskLoader<List<BookingList>>{
     }
 
     @Override
-    public List<Earthquake> loadInBackground() {
+    public List<BookingList> loadInBackground() {
         if (mUrl == null) {
             return null;
         }
 
         // Perform the network request, parse the response, and extract a list of earthquakes.
-        List<Earthquake> earthquakes = QueryUtils.fetchEarthquakeData(mUrl);
-        return earthquakes;
+        List<BookingList> bookinglists = QueryUtils.fetchEarthquakeData(mUrl);
+        return bookinglists;
     }
 
 }

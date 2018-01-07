@@ -8,11 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import java.util.Date;
 import java.util.List;
 
-public class BookListAdapter extends ArrayAdapter<BookList> {
-    public BookListAdapter(Context context, List<BookList> booklists) {
+public class BookListAdapter extends ArrayAdapter<BookingList> {
+    public BookListAdapter(Context context, List<BookingList> booklists) {
         super(context, 0, booklists);
     }
 
@@ -25,11 +24,13 @@ public class BookListAdapter extends ArrayAdapter<BookList> {
                     R.layout.booklist_item, parent, false);
         }
 
-        BookList currentBookLists = getItem(position);
+        BookingList currentBookLists = getItem(position);
 
         TextView titleTextView = (TextView) listItemView.findViewById(R.id.title);
-        titleTextView.setText(currentWord.getTitle());
+        titleTextView.setText(currentBookLists.getTitle());
 
         TextView defaultTextView = (TextView) listItemView.findViewById(R.id.author);
-        defaultTextView.setText(currentWord.getAuthor());
+        defaultTextView.setText(currentBookLists.getAuthor());
+        return listItemView;
     }
+}

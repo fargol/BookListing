@@ -21,14 +21,12 @@ import java.util.List;
 public class BookListActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<BookingList>> {
 
-    private static final String LOG_TAG = EarthquakeActivity.class.getName();
+    private static final String LOG_TAG = BookListActivity.class.getName();
 
     private static final String USGS_REQUEST_URL =
             " https://www.googleapis.com/books/v1/volumes?q=android&maxResults=1";
 
     private static final int EARTHQUAKE_LOADER_ID = 1;
-
-    /** Adapter for the list of earthquakes */
     private BookListAdapter mAdapter;
 
     @Override
@@ -36,19 +34,14 @@ public class BookListActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.booklist_activity);
 
-        // Find a reference to the {@link ListView} in the layout
         ListView bookListView = (ListView) findViewById(R.id.list);
 
-        // Create a new adapter that takes an empty list of earthquakes as input
         mAdapter = new BookListAdapter(this, new ArrayList<BookingList>());
-
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
         bookListView.setAdapter(mAdapter);
 
         // Set an item click listener on the ListView, which sends an intent to a web browser
         // to open a website with more information about the selected earthquake.
-        earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 // Find the current earthquake that was clicked on
@@ -77,11 +70,11 @@ public class BookListActivity extends AppCompatActivity
     @Override
     public Loader<List<BookingList>> onCreateLoader(int i, Bundle bundle) {
         // Create a new loader for the given URL
-        return new EarthquakeLoader(this, USGS_REQUEST_URL);
+        return new BookListLoader(this, USGS_REQUEST_URL);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<BookingList>> loader, List<Earthquake> bookinglists) {
+    public void onLoadFinished(Loader<List<BookingList>> loader, List<BookingList> bookinglists) {
         // Clear the adapter of previous earthquake data
         mAdapter.clear();
 
@@ -89,7 +82,7 @@ public class BookListActivity extends AppCompatActivity
         // data set. This will trigger the ListView to update.
         if ( bookinglists != null && ! bookinglists.isEmpty()) {
             mAdapter.addAll( bookinglists);
-        }
+        } 
     }
 
     @Override
